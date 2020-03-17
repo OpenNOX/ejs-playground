@@ -13,6 +13,13 @@
     failed: 'rgb(192, 57, 43)'
   };
 
+  const internalMocks = {
+    isFirstBatch: true,
+    context: {
+      incrementCount() { }
+    }
+  };
+
   /**
    * @function handleEditorChange
    * @description Render EJS template OR error stack to result DOM element.
@@ -20,7 +27,7 @@
   const handleEditorChange = () => {
     let result;
     try {
-      result = ejs.render(editor.getValue());
+      result = ejs.render(editor.getValue(), internalMocks);
       resultEl.parentNode.style.background = colors.success;
     } catch (e) {
       result = e.stack;
