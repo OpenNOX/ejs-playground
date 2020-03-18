@@ -27,7 +27,8 @@
   const handleEditorChange = () => {
     let result;
     try {
-      result = ejs.render(editor.getValue(), internalMocks);
+      const template = ejs.compile(editor.getValue());
+      result = template(internalMocks);
       resultEl.parentNode.style.background = colors.success;
     } catch (e) {
       result = e.stack;
